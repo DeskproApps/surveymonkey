@@ -1,0 +1,22 @@
+{
+  "idKey": "summary_url",
+  "main": [
+    [
+      {
+        "name": "name",
+        "label": "Collector",
+        "type": "text"
+      },
+      {
+        "name": "type",
+        "label": "Type",
+        "type": "text"
+      },
+      {
+        "name": "status",
+        "label": "",
+        "type": "text"
+      }
+    ]
+  ]
+}

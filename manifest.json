@@ -1,29 +1,37 @@
 {
-  "name": "@deskpro-apps/my-app",
-  "title": "My App",
-  "description": "My Deskpro app",
+  "name": "@deskpro-apps/surveymonkey",
+  "title": "SurveyMonkey",
+  "description": "Get valuable insights and make data-driven decisions with SurveyMonkey's easy-to-use survey platform",
   "version": "0.0.0",
   "scope": "agent",
   "isSingleInstall": false,
   "hasDevMode": true,
-  "targets": [{
-    "target": "ticket_sidebar",
-    "entrypoint": "index.html"
-  }],
+  "targets": [
+    {
+      "target": "ticket_sidebar",
+      "entrypoint": "index.html"
+    }
+  ],
   "settings": {
-    "example": {
-      "title": "Example Setting",
-      "description": "Example backend only setting",
+    "api_key": {
+      "title": "API Key",
+      "description": "The API key can be obtained by following our setup guide",
       "type": "string",
-      "isRequired": false,
+      "isRequired": true,
       "isBackendOnly": true
     }
   },
   "proxy": {
-    "whitelist": [{
-      "url": "https://jsonplaceholder.typicode.com/.*",
-      "methods": ["GET"],
-      "timeout": 20
-    }]
+    "whitelist": [
+      {
+        "url": "https://api.surveymonkey.net/v3/.*",
+        "methods": [
+          "GET",
+          "POST",
+          "PATCH"
+        ],
+        "timeout": 20
+      }
+    ]
   }
 }
