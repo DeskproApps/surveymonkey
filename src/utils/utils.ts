@@ -12,3 +12,7 @@ export const getValueByKey = (object: any, key: string) => {
   }
   return value; // return the value of the final key in the array
 };
+
+export const capitalizeFirstLetter = (string: string) => {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+};

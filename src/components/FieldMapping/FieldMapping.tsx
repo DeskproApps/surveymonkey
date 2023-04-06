@@ -156,27 +156,28 @@ export const FieldMapping = ({
                           </Property>
                         ))}
                     </PropertyRow>
-                    {usableFields[2]?.value === "open" && (
-                      <Button
-                        text="Insert Link"
-                        intent="secondary"
-                        onClick={() => {
-                          client
-                            ?.deskpro()
-                            .appendContentToActiveTicketReplyBox(
-                              `Click the link below to complete the survey ${field.surveyName} via SurveyMonkey: \n`
-                            );
-                          setTimeout(() => {
+                    {usableFields[2]?.value === "open" &&
+                      field.type === "weblink" && (
+                        <Button
+                          text="Insert Link"
+                          intent="secondary"
+                          onClick={() => {
                             client
                               ?.deskpro()
-                              .appendLinkToActiveTicketReplyBox(
-                                field.url,
-                                "Survey"
+                              .appendContentToActiveTicketReplyBox(
+                                `Click the link below to complete the survey ${field.surveyName} via SurveyMonkey: \n`
                               );
-                          }, 100);
-                        }}
-                      ></Button>
-                    )}
+                            setTimeout(() => {
+                              client
+                                ?.deskpro()
+                                .appendLinkToActiveTicketReplyBox(
+                                  field.url,
+                                  "Survey"
+                                );
+                            }, 100);
+                          }}
+                        ></Button>
+                      )}
                   </Stack>
                 );
 

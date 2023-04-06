@@ -10,7 +10,7 @@
       {
         "name": "type",
         "label": "Type",
-        "type": "text"
+        "type": "capitalizeText"
       },
       {
         "name": "status",

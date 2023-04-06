@@ -1,7 +1,7 @@
 import { ReactElement } from "react";
 import { StyledLink } from "../styles";
 import { IJson } from "../types/json";
-import { getValueByKey } from "./utils";
+import { capitalizeFirstLetter, getValueByKey } from "./utils";
 import { FieldMapping } from "../components/FieldMapping/FieldMapping";
 import collectorJson from "../mapping/collector.json";
 
@@ -25,6 +25,14 @@ export const mapFieldValues = (
         value = new Date(
           field[metadataField.name as keyof typeof field] as Date
         ).toLocaleDateString("en-UK");
+
+        break;
+      }
+
+      case "capitalizeText": {
+        value = capitalizeFirstLetter(
+          field[metadataField.name as keyof typeof field] as string
+        );
 
         break;
       }
