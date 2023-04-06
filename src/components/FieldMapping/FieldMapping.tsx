@@ -1,5 +1,6 @@
 import {
   Button,
+  ExternalIconLink,
   H1,
   H3,
   HorizontalDivider,
@@ -14,8 +15,8 @@ import { ReactElement } from "react";
 import { StyledLink } from "../../styles";
 import { IJson } from "../../types/json";
 import { mapFieldValues } from "../../utils/mapFieldValues";
-import { LogoAndLinkButton } from "../LogoAndLinkButton/LogoAndLinkButton";
 import { PropertyRow } from "../PropertyRow/PropertyRow";
+import { SurveyMonkeyLogo } from "../SurveyMonkeyLogo/SurveyMonkeyLogo";
 
 const SpaceBetweenFields = ({
   field: field,
@@ -97,7 +98,10 @@ export const FieldMapping = ({
               title && <H1>{title}</H1>
             )}
             {externalUrl && (
-              <LogoAndLinkButton endpoint={externalUrl}></LogoAndLinkButton>
+              <ExternalIconLink
+                href={externalUrl}
+                icon={<SurveyMonkeyLogo />}
+              ></ExternalIconLink>
             )}
           </Stack>
         ))}
@@ -114,7 +118,10 @@ export const FieldMapping = ({
                 <H3>{childTitleAccessor(field)}</H3>
               )}
               {externalChildUrl && (
-                <LogoAndLinkButton endpoint={field[idKey]}></LogoAndLinkButton>
+                <ExternalIconLink
+                  href={field[idKey]}
+                  icon={<SurveyMonkeyLogo />}
+                ></ExternalIconLink>
               )}
             </Stack>
           )}
