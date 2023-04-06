@@ -139,7 +139,7 @@ export const FieldMapping = ({
               case 3:
               case 2:
                 return (
-                  <Stack style={{ width: "100%" }} vertical gap={5}>
+                  <Stack style={{ width: "100%" }} vertical gap={5} key={i}>
                     <PropertyRow key={i}>
                       {usableFields
                         .filter((_, i) => i !== 2)
