@@ -47,7 +47,8 @@ export const getSurveysWithCollectors = async (client: IDeskproClient) => {
   return surveysWithDetails.map((survey) => {
     const collectorsBelongingToSurvey = collectorsWithDetails
       .flat()
-      .filter((collector) => collector.parentId === survey.id);
+      .filter((collector) => collector.parentId === survey.id)
+      .map((e) => ({ ...e, surveyName: survey.title }));
     return {
       ...survey,
       status: collectorsBelongingToSurvey.some((e) => e.status === "open")

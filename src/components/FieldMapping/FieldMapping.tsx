@@ -2,10 +2,10 @@ import {
   Button,
   ExternalIconLink,
   H1,
+  H2,
   H3,
   HorizontalDivider,
   P5,
-  P8,
   Property,
   Stack,
   useDeskproAppClient,
@@ -133,9 +133,9 @@ export const FieldMapping = ({
                 return (
                   usableFields[0].value && (
                     <Stack vertical gap={4} key={i} style={{ width: "100%" }}>
-                      <P8 style={{ color: theme?.colors.grey80 }}>
+                      <H2 style={{ color: theme?.colors.grey80 }}>
                         {usableFields[0].key}
-                      </P8>
+                      </H2>
                       <P5 style={{ whiteSpace: "pre-line", width: "100%" }}>
                         {usableFields[0].value}
                       </P5>
@@ -160,14 +160,21 @@ export const FieldMapping = ({
                       <Button
                         text="Insert Link"
                         intent="secondary"
-                        onClick={() =>
+                        onClick={() => {
                           client
                             ?.deskpro()
-                            .appendLinkToActiveTicketReplyBox(
-                              field.url,
-                              "Survey"
-                            )
-                        }
+                            .appendContentToActiveTicketReplyBox(
+                              `Click the link below to complete the survey ${field.surveyName} via SurveyMonkey: \n`
+                            );
+                          setTimeout(() => {
+                            client
+                              ?.deskpro()
+                              .appendLinkToActiveTicketReplyBox(
+                                field.url,
+                                "Survey"
+                              );
+                          }, 100);
+                        }}
                       ></Button>
                     )}
                   </Stack>
