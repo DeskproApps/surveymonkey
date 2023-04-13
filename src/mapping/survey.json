@@ -1,0 +1,34 @@
+{
+  "idKey": "summary_url",
+  "title": "Surveys",
+  "titleKeyName": "title",
+  "externalUrl": "url",
+  "main": [
+    [
+      {
+        "name": "date_created",
+        "label": "Created",
+        "type": "date"
+      },
+      {
+        "name": "status",
+        "label": "Status",
+        "type": "text"
+      }
+    ],
+    [
+      {
+        "name": "response_count",
+        "label": "Number of Responses",
+        "type": "responses"
+      }
+    ],
+    [
+      {
+        "name": "collectors",
+        "label": "",
+        "type": "collector"
+      }
+    ]
+  ]
+}
