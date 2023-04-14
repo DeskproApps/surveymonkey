@@ -2,16 +2,11 @@
   "name": "@deskpro-apps/surveymonkey",
   "title": "SurveyMonkey",
   "description": "Get valuable insights and make data-driven decisions with SurveyMonkey's easy-to-use survey platform",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "scope": "agent",
   "isSingleInstall": false,
   "hasDevMode": true,
-  "targets": [
-    {
-      "target": "ticket_sidebar",
-      "entrypoint": "index.html"
-    }
-  ],
+  "targets": [{ "target": "ticket_sidebar", "entrypoint": "index.html" }],
   "settings": {
     "api_key": {
       "title": "API Key",
@@ -25,11 +20,7 @@
     "whitelist": [
       {
         "url": "https://api.surveymonkey.net/v3/.*",
-        "methods": [
-          "GET",
-          "POST",
-          "PATCH"
-        ],
+        "methods": ["GET", "POST", "PATCH"],
         "timeout": 20
       }
     ]
