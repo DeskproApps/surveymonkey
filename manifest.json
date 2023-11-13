@@ -2,6 +2,7 @@
   "name": "@deskpro-apps/surveymonkey",
   "title": "SurveyMonkey",
   "description": "Get valuable insights and make data-driven decisions with SurveyMonkey's easy-to-use survey platform",
+  "appStoreUrl": "https://www.deskpro.com/product-embed/apps/surveymonkey",
   "version": "1.0.4",
   "scope": "agent",
   "isSingleInstall": false,
