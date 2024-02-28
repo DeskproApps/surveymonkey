@@ -9,10 +9,10 @@ import { QueryClientProvider } from "@tanstack/react-query";
 const root = ReactDOM.createRoot(document.getElementById("root") as Element);
 root.render(
   <React.StrictMode>
-    <QueryClientProvider client={query}>
-      <DeskproAppProvider>
+    <DeskproAppProvider>
+      <QueryClientProvider client={query}>
         <App />
-      </DeskproAppProvider>
-    </QueryClientProvider>
+      </QueryClientProvider>
+    </DeskproAppProvider>
   </React.StrictMode>
 );

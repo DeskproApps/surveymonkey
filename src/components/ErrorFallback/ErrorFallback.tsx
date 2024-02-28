@@ -1,23 +1,12 @@
-import { Stack, H1, H2, Button } from "@deskpro/app-sdk";
-import { faRefresh } from "@fortawesome/free-solid-svg-icons";
+import { ErrorBlock } from "../ErrorBlock";
 
-export const ErrorFallback = ({
-  error,
-  resetErrorBoundary,
-}: {
-  error: Error;
-  resetErrorBoundary: () => void;
-}) => {
+export const ErrorFallback = ({ error }: { error: Error }) => {
+  const message = JSON.parse(error?.message || "{}")?.error?.message;
+
+  // eslint-disable-next-line no-console
+  console.error(error.message);
+
   return (
-    <Stack vertical gap={10} role="alert">
-      <H1>Something went wrong:</H1>
-      <H2>{error.message}</H2>
-      <Button
-        text="Reload"
-        onClick={resetErrorBoundary}
-        icon={faRefresh}
-        intent="secondary"
-      />
-    </Stack>
+    <ErrorBlock text={message}/>
   );
 };
