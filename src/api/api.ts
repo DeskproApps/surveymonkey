@@ -1,8 +1,34 @@
-import { IDeskproClient, proxyFetch, ProxyResponse, V2ProxyRequestInit } from "@deskpro/app-sdk";
+import {
+  proxyFetch,
+  ProxyResponse,
+  IDeskproClient,
+  V2ProxyRequestInit,
+  adminGenericProxyFetch,
+} from "@deskpro/app-sdk";
 import { ISurvey, ISurveyWithDetails } from "../types/survey";
 import { ICollector, ICollectorWithDetails } from "../types/collector";
 
 export type RequestMethod = "GET" | "POST" | "PATCH" | "DELETE";
+
+export const getCurrentUser = async (
+  client: IDeskproClient,
+  apiKey: string,
+) => {
+  const dpFetch = await adminGenericProxyFetch(client);
+  const response = await dpFetch(`https://api.surveymonkey.net/v3/users/me`, {
+    headers: {
+      method: "GET",
+      "Content-Type": "application/json",
+      Authorization: ` Bearer ${apiKey}`,
+    },
+  });
+
+  if (isResponseError(response)) {
+    throw new Error(await response.text());
+  }
+
+  return response.json();
+};
 
 export const getSurveysWithCollectors = async (client: IDeskproClient) => {
   const surveys = await getSurveys(client);
