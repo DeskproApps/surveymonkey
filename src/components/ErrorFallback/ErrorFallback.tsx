@@ -1,4 +1,5 @@
 import { ErrorBlock } from "../ErrorBlock";
+import { Container } from "../Layout";
 
 export const ErrorFallback = ({ error }: { error: Error }) => {
   const message = JSON.parse(error?.message || "{}")?.error?.message;
@@ -7,6 +8,8 @@ export const ErrorFallback = ({ error }: { error: Error }) => {
   console.error(error.message);
 
   return (
-    <ErrorBlock text={message}/>
+    <Container>
+      <ErrorBlock text={message}/>
+    </Container>
   );
 };

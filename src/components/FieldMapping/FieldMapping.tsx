@@ -67,13 +67,7 @@ export const FieldMapping = ({
   return (
     <Stack vertical gap={5} style={{ width: "100%" }}>
       {type === "collector" && (
-        <HorizontalDivider
-          style={{
-            margin: "8px 0px 8px 0px",
-            width: "115%",
-            backgroundColor: theme?.colors.grey10,
-          }}
-        />
+        <HorizontalDivider style={{ width: "100%" }}/>
       )}
       {title ||
         internalUrl ||
@@ -195,14 +189,7 @@ export const FieldMapping = ({
             }
           })}
           {type === "collector" && (
-            <HorizontalDivider
-              style={{
-                margin: "8px 0px 8px 0px",
-                width: "115%",
-                marginLeft: i === fields.length - 1 ? "-20px" : "0px",
-                backgroundColor: theme?.colors.grey10,
-              }}
-            />
+            <HorizontalDivider style={{ width: "100%" }}/>
           )}
         </Stack>
       ))}

@@ -6,6 +6,7 @@ import {
 } from "@deskpro/app-sdk";
 import { getSurveysWithCollectors } from "../api/api";
 import { FieldMapping } from "../components/FieldMapping/FieldMapping";
+import { Container } from "../components/Layout";
 import surveyJson from "../mapping/survey.json";
 
 export const Main = () => {
@@ -30,7 +31,7 @@ export const Main = () => {
   >;
 
   return (
-    <Stack>
+    <Container>
       {surveysWithCollectorsQuery && (
         <FieldMapping
           externalChildUrl={surveyJson.externalUrl}
@@ -40,6 +41,6 @@ export const Main = () => {
           metadata={surveyJson.main}
         ></FieldMapping>
       )}
-    </Stack>
+    </Container>
   );
 };
