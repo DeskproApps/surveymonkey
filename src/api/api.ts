@@ -1,8 +1,6 @@
 import {
   proxyFetch,
-  ProxyResponse,
   IDeskproClient,
-  V2ProxyRequestInit,
   adminGenericProxyFetch,
 } from "@deskpro/app-sdk";
 import { ISurvey, ISurveyWithDetails } from "../types/survey";
@@ -127,7 +125,7 @@ export const request = async (
 ) => {
   const fetch = await proxyFetch(client);
 
-  const options: V2ProxyRequestInit = {
+  const options: RequestInit = {
     method,
     headers: {
       "Content-Type": "application/json",
@@ -151,5 +149,5 @@ export const request = async (
   return response.json();
 };
 
-export const isResponseError = (response: ProxyResponse) =>
+export const isResponseError = (response: Response) =>
   response.status < 200 || response.status >= 400;
