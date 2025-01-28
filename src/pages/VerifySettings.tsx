@@ -59,7 +59,7 @@ const VerifySettings: FC = () => {
       />
       {nbsp}
       {!user
-        ? <Invalid type="p1">{error}</Invalid> || ""
+        ? <Invalid type="p1">{error}</Invalid>
         : (
           <Secondary type="p1">
             Verified as &lt;{user.email}&gt;
