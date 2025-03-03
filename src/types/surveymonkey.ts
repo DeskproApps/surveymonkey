@@ -1,0 +1,12 @@
+type SurveyMonkeyScope =
+    | "users_read"
+    | "surveys_read"
+    | "collectors_read"
+    | "collectors_write"
+    | "contacts_read"
+    | "contacts_write"
+    | "surveys_write"
+    | "responses_read"
+    | "webhooks_read"
+    | "webhooks_write"
+    | "library_read"

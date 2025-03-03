@@ -1,12 +1,11 @@
-import { useState, useCallback } from "react";
-import styled from "styled-components";
+import { getCurrentUser } from "@/api/SurveyMonkey";
+import { nbsp, AUTH_ERROR } from "@/constants";
 import { TSpan, Stack, Button } from "@deskpro/deskpro-ui";
 import { useDeskproAppEvents, useDeskproAppClient } from "@deskpro/app-sdk";
-import { getCurrentUser } from "../api/api";
-import { nbsp, AUTH_ERROR } from "../constants";
+import { useState, useCallback } from "react";
+import styled from "styled-components";
 import type { FC } from "react";
-import type { Settings } from "../types/settings";
-import type { User } from "../types/user";
+import type { User } from "@/types/user";
 
 const Invalid = styled(TSpan)`
   color: ${({ theme }) => theme.colors.red100};
@@ -18,13 +17,13 @@ const Secondary = styled(TSpan)`
 
 const VerifySettings: FC = () => {
   const { client } = useDeskproAppClient();
-  const [user, setUser] = useState<null|User>(null);
-  const [settings, setSettings] = useState<Settings>({});
+  const [user, setUser] = useState<null | User>(null);
+  const [settings, setSettings] = useState<{ access_token?: string }>({});
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [error, setError] = useState<null|string>(null);
+  const [error, setError] = useState<null | string>(null);
 
   const onVerifySettings = useCallback(() => {
-    if (!client || !settings?.api_key) {
+    if (!client || !settings?.access_token) {
       return;
     }
 
@@ -32,14 +31,18 @@ const VerifySettings: FC = () => {
     setError("");
     setUser(null);
 
-    return getCurrentUser(client, settings.api_key)
-      .then(setUser)
-      .catch((err) => {
-        try {
-          setError(JSON.parse(err?.message || "{}")?.error?.message);
-        } catch (e) {
-          setError(AUTH_ERROR);
+    return getCurrentUser(client, settings.access_token)
+      .then((user)=>{
+        if(user){
+          setUser(user)
+        }else{
+          setError(AUTH_ERROR)
         }
+      })
+      .catch((e) => {
+console.log(e)
+        setError(AUTH_ERROR);
+
       })
       .finally(() => setIsLoading(false));
   }, [client, settings]);
@@ -55,7 +58,7 @@ const VerifySettings: FC = () => {
         intent="secondary"
         onClick={onVerifySettings}
         loading={isLoading}
-        disabled={!settings?.api_key || isLoading}
+        disabled={!settings?.access_token || isLoading}
       />
       {nbsp}
       {!user
@@ -70,4 +73,4 @@ const VerifySettings: FC = () => {
   );
 };
 
-export { VerifySettings };
+export default VerifySettings
