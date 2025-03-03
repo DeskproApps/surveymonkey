@@ -40,7 +40,6 @@ const VerifySettings: FC = () => {
         }
       })
       .catch((e) => {
-console.log(e)
         setError(AUTH_ERROR);
 
       })

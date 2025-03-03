@@ -1,4 +1,4 @@
-type SurveyMonkeyScope =
+export type SurveyMonkeyScope =
     | "users_read"
     | "surveys_read"
     | "collectors_read"
