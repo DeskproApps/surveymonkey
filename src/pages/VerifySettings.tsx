@@ -39,7 +39,7 @@ const VerifySettings: FC = () => {
           setError(AUTH_ERROR)
         }
       })
-      .catch((e) => {
+      .catch(() => {
         setError(AUTH_ERROR);
 
       })
