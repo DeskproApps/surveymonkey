@@ -1,7 +1,7 @@
 import { lightTheme, ThemeProvider } from "@deskpro/deskpro-ui";
 import { cleanup, render, waitFor } from "@testing-library/react/";
 import React from "react";
-import { Main } from "../../src/pages/Main";
+import Main from "../../src/pages/Main";
 
 const renderPage = () => {
   return render(
