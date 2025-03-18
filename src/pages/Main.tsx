@@ -9,8 +9,8 @@ import surveyJson from "@/mapping/survey.json";
 const Main = () => {
   const { logoutActiveUser } = useLogout()
   const { context } = useDeskproLatestAppContext<ContextData, Settings>()
-  const isUsingOAuth = context?.settings?.use_access_token !== true
 
+  const isUsingOAuth = context?.settings?.use_access_token !== true || context.settings.use_advanced_connect === false
 
   useInitialisedDeskproAppClient((client) => {
     client.setTitle("SurveyMonkey");
