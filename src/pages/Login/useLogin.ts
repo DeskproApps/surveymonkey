@@ -26,8 +26,7 @@ export default function useLogin(): UseLogin {
     const user = context?.data?.ticket?.primaryUser || context?.data?.user
 
     useInitialisedDeskproAppClient(async (client) => {
-        if (context?.settings.use_deskpro_saas === undefined || !user) {
-            // Make sure settings have loaded.
+        if (!user) {
             return
         }
 
@@ -36,7 +35,7 @@ export default function useLogin(): UseLogin {
             setError("Enable OAuth to access this page");
             return
         }
-        const mode = context?.settings.use_deskpro_saas ? 'global' : 'local';
+        const mode = context?.settings.use_advanced_connect === false ? 'global' : 'local';
 
         const clientId = context?.settings.client_id;
         if (mode === 'local' && (typeof clientId !== 'string' || clientId.trim() === "")) {
@@ -77,7 +76,7 @@ export default function useLogin(): UseLogin {
         setAuthUrl(oauth2Response.authorizationUrl)
         setOAuth2Context(oauth2Response)
 
-    }, [setAuthUrl, context?.settings.use_deskpro_saas])
+    }, [setAuthUrl, context?.settings.use_advanced_connect])
 
     useInitialisedDeskproAppClient((client) => {
         if (!user || !oauth2Context) {

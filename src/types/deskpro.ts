@@ -1,7 +1,7 @@
 /** Deskpro types */
 export type Settings = {
     client_id?: string,
-    use_deskpro_saas?: boolean,
+    use_advanced_connect?: boolean,
     use_access_token?: boolean,
   };
   
