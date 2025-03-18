@@ -8,29 +8,99 @@
   "isSingleInstall": false,
   "hasDevMode": true,
   "serveUrl": "https://apps-cdn.deskpro-service.com/__name__/__version__",
-  "targets": [{ "target": "ticket_sidebar", "entrypoint": "index.html" }],
+  "secrets": "duigHU4j5LpEnl/z10+g9hlSrHOF6k2LIrpDyjiitWrP+9Axm1b7yofWi5PIAPzmUiwvP+SxlayYwmLGdc+Qq/qnsmzcZ4RVdd5gnqqhEv88w8skemjyFtk8/dMlrGfUY/prhhhm2Km3X5Y18+8cWVCCI0d36fKHuo33TgXdUg1QkezWeYflUj7PVCJgIARlXg6S/Rn65++O/6DMVXkxRP8r59Y0AhIUgJY9rxNRCneXUHG59cJ4Jx5OcHtbzIKNlpiWAfzsjzccNlveHSDGRzkiYraflh/YYMIWe1iheEa5+WvZpQidx4KAYqqrsYYkN1+1Nk5+Dh9C74pE+epoW5q+me4CcJR5CfAlMpMZnr32ecyJqkyWBmMk1swRnhlTNx7BEcmzy3xyAFscR/fhdJlQIkcbq9/YykRiIAKDAFmvLYhn4SbwVZMhlWTOvn2Ottt82HRr7lP6ZKZNkqaeuW63egzrowcJxR6KJRcDQqYrCQoLHOyK4wnqJ+XCU1DW4A2nAZJmTkykkgIwJt+eMKOmrErh9QArSibV+X6XBc14vUGRwed62GhzNoWZv/kU//gp8AZkwWRGhYbUQcxT+JPcN4HOqvJSPofJXTuDKZ6879oSO6S0mAuE87OzFWRKuGOhMgoXvwxzysXTnEDKsMOKZVsmlD3GWR/wReVk4q3OAGPpLo6z5f1Ly5PJtSA7KLhMUo37a+UEto6/H935oiSuHZQb1XYqvxT5Wm3k2EuFVMqqL9zxaUSKR6bbunX9mrL00lTRQTTNVjyj5bk6gcWc0oZFoZDlKbJCfS2al5pJMAsjZEFAdRtUi06WnHtKKpAYULbyBEFE+fSs9a7A9JuXyEXNYXha6c8biniO9yUr/XrKrOo0PAyaEFgRum7mHdPTlf3OJ5AQR1f+WgvpU9zm/tAou6gGJYtp0e/ePIBnaMT+cCTZPbxJcgR9iZ21RPwdiD5YTSehTuDjvpsEwKHJiGSW57BxLcJasUQ9CWjGQmBtm2YKtQ8g2/W03WuvOY8QwfZSpKyW3pHWtNSUVKjOjh4pldRXjwEjWSmRW/MH1zyQIBSGV9WF4pir9ny0tdE9cA/VQGzYZUYM7Rc+zw==",
+  "targets": [
+    {
+      "target": "ticket_sidebar",
+      "entrypoint": "index.html"
+    }
+  ],
   "settings": {
-    "api_key": {
-      "title": "API Key",
-      "description": "The API key can be obtained by following our setup guide",
+    "use_advanced_connect": {
+      "title": "Advanced Connect",
+      "description": "Follow the setup guide and use your credentials to connect the app to Deskpro.",
+      "type": "boolean",
+      "default": false,
+      "isRequired": false,
+      "isBackendOnly": false,
+      "order": 5
+    },
+    "use_access_token": {
+      "title": "Use Access Token",
+      "type": "boolean",
+      "isRequired": false,
+      "isBackendOnly": false,
+      "default": false,
+      "condition": "settings.use_advanced_connect != false",
+      "order": 10
+    },
+    "access_token": {
+      "title": "Access Token",
+      "description": "The access token can be obtained by following our setup guide",
       "type": "string",
-      "isRequired": true,
-      "isBackendOnly": true
+      "isRequired": false,
+      "isBackendOnly": true,
+      "condition": "settings.use_advanced_connect != false && settings.use_access_token == true",
+      "order": 20
     },
     "verify_settings": {
       "title": "",
       "type": "app_embedded",
-      "options": { "entrypoint": "#/admin/verify_settings" },
+      "options": {
+        "entrypoint": "#/admin/verify_settings",
+        "height": "30px"
+      },
       "isRequired": false,
       "isBackendOnly": true,
-      "order": 20
+      "condition": "settings.use_advanced_connect != false && settings.use_access_token == true",
+      "order": 30
+    },
+    "client_id": {
+      "title": "Client ID",
+      "type": "string",
+      "isRequired": false,
+      "isBackendOnly": false,
+      "condition": "settings.use_advanced_connect != false && settings.use_access_token != true",
+      "order": 40
+    },
+    "client_secret": {
+      "title": "Client Secret",
+      "type": "string",
+      "isRequired": false,
+      "isBackendOnly": true,
+      "condition": "settings.use_advanced_connect != false && settings.use_access_token != true",
+      "order": 50
+    },
+    "callback_url": {
+      "title": "Callback URL",
+      "type": "app_embedded",
+      "options": {
+        "entrypoint": "#/admin/callback"
+      },
+      "isRequired": false,
+      "isBackendOnly": true,
+      "condition": "settings.use_advanced_connect != false && settings.use_access_token != true",
+      "order": 60
     }
   },
   "proxy": {
     "whitelist": [
       {
+        
         "url": "https://api.surveymonkey.net/v3/.*",
-        "methods": ["GET", "POST", "PATCH"],
+        "methods": [
+          "GET",
+          "POST",
+          "PATCH"
+        ],
+        "timeout": 20
+      },
+      {
+        
+        "url": "https://api.surveymonkey.com/oauth/.*",
+        "methods": [
+          "POST"
+        ],
         "timeout": 20
       }
     ]

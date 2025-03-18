@@ -1,23 +1,42 @@
-import {
-  LoadingSpinner,
-  useInitialisedDeskproAppClient,
-  useQueryWithClient,
-} from "@deskpro/app-sdk";
-import { getSurveysWithCollectors } from "../api/api";
-import { FieldMapping } from "../components/FieldMapping/FieldMapping";
-import { Container } from "../components/Layout";
-import surveyJson from "../mapping/survey.json";
+import { AppElementPayload, LoadingSpinner, useDeskproAppEvents, useDeskproLatestAppContext, useInitialisedDeskproAppClient, useQueryWithClient, } from "@deskpro/app-sdk";
+import { Container } from "@/components/Layout";
+import { ContextData, Settings } from "@/types/deskpro";
+import { FieldMapping } from "@/components/FieldMapping/FieldMapping";
+import { getSurveysWithCollectors } from "@/api/api";
+import { useLogout } from "@/hooks/deskpro";
+import surveyJson from "@/mapping/survey.json";
 
-export const Main = () => {
+const Main = () => {
+  const { logoutActiveUser } = useLogout()
+  const { context } = useDeskproLatestAppContext<ContextData, Settings>()
+
+  const isUsingOAuth = context?.settings?.use_access_token !== true || context.settings.use_advanced_connect === false
+
   useInitialisedDeskproAppClient((client) => {
     client.setTitle("SurveyMonkey");
 
     client.registerElement("refreshButton", { type: "refresh_button" });
 
-    client.registerElement("nutshellHomeButton", {
+    client.registerElement("homeButton", {
       type: "home_button",
     });
+    if (isUsingOAuth) {
+      client.registerElement("menuButton", { type: "menu", items: [{ title: "Logout" }] });
+    }
   });
+
+  useDeskproAppEvents({
+    onElementEvent(id: string, _type: string, _payload?: AppElementPayload) {
+      switch (id) {
+        case "menuButton":
+          if (isUsingOAuth) {
+            logoutActiveUser()
+          }
+
+          break;
+      }
+    },
+  })
 
   const surveysWithCollectorsQuery = useQueryWithClient(["abc"], (client) =>
     getSurveysWithCollectors(client)
@@ -43,3 +62,5 @@ export const Main = () => {
     </Container>
   );
 };
+
+export default Main

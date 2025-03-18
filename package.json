@@ -14,7 +14,7 @@
     "bumpManifestVer": "node ./bin/bumpManifestVer.js"
   },
   "dependencies": {
-    "@deskpro/app-sdk": "^5.1.1",
+    "@deskpro/app-sdk": "^6.0.3",
     "@deskpro/deskpro-ui": "^8.2.0",
     "@heroicons/react": "1.0.6",
     "@tanstack/react-query": "^4.36.1",
@@ -53,6 +53,6 @@
     "styled-components": "^6.1.14",
     "ts-jest": "^27.1.5",
     "typescript": "^5.7.2",
-    "vite": "^6.0.11"
+    "vite": "^6.2.2"
   }
 }

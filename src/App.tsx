@@ -1,12 +1,11 @@
-import { LoadingSpinner } from "@deskpro/app-sdk";
-import { Suspense } from "react";
+import { AdminCallbackPage, HomePage, LoadingPage, LoginPage, VerifySettingsPage } from "./pages";
 import { ErrorBoundary } from "react-error-boundary";
-import { HashRouter, Route, Routes } from "react-router-dom";
-import { Main } from "./pages/Main";
-import { VerifySettings } from "./pages/VerifySettings";
-import { QueryErrorResetBoundary } from "@tanstack/react-query";
 import { ErrorFallback } from "./components/ErrorFallback/ErrorFallback";
-import { Redirect } from "./components/Redirect/Redirect";
+import { HashRouter, Route, Routes } from "react-router-dom";
+import { LoadingSpinner } from "@deskpro/app-sdk";
+import { QueryErrorResetBoundary } from "@tanstack/react-query";
+import { Suspense } from "react";
+
 
 function App() {
   return (
@@ -16,9 +15,11 @@ function App() {
           {({ reset }) => (
             <ErrorBoundary onReset={reset} FallbackComponent={ErrorFallback}>
               <Routes>
-                <Route path="/admin/verify_settings" element={<VerifySettings/>} />
-                <Route path="/redirect" element={<Redirect />} />
-                <Route index element={<Main />} />
+                <Route index element={<LoadingPage />} />
+                <Route path="/admin/callback" element={<AdminCallbackPage/>} />
+                <Route path="/admin/verify_settings" element={<VerifySettingsPage/>} />
+                <Route path="/home" element={<HomePage />} />
+                <Route path="/login" element={<LoginPage />} />
               </Routes>
             </ErrorBoundary>
           )}
