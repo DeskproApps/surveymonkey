@@ -22,7 +22,7 @@ jobs:
       - name: Prep local dev
         run: |
           touch ~/.gitconfig
-          mkdir ~/.ssh
+          mkdir -p ~/.ssh
           git config --global user.name "$(git log -1 --pretty=format:%an)"
           git config --global user.email "$(git log -1 --pretty=format:%ae)"
 
