@@ -1,3 +1,5 @@
+import * as Sentry from '@sentry/react';
+import './instrument';
 import { DeskproAppProvider } from "@deskpro/app-sdk";
 import React from "react";
 import ReactDOM from "react-dom/client";
