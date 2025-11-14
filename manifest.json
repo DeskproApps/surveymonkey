@@ -31,7 +31,12 @@
       {
         "url": "https://api.surveymonkey.net/v3/.*",
         "methods": ["GET", "POST", "PATCH"],
-        "timeout": 20
+        "timeout": 20,
+        "settingsInjection": {
+          "api_key": {
+            "header": ["Authorization"]
+          }
+        }
       }
     ]
   }
